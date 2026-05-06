@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # 1. 監視対象の設定（日本語銘柄名の辞書）
 symbol_map = {
     '6255.T': 'NPC',
-    '464A.T': 'QPS研究所',
+    '464A.T': 'QPS',
     '3778.T': 'さくらインターネット'
 }
 symbols = list(symbol_map.keys())
