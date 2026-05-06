@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 # 1. 監視対象の設定
 symbol_map = {
     '6255.T': 'NPC',
-    '464A.T': 'QPS研究所',
-    '3778.T': 'さくらインターネット'
+    '464A.T': 'QPS',
+    '3778.T': 'SSKURA INTERNET'
 }
 symbols = list(symbol_map.keys())
 
