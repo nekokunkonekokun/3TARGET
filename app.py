@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 symbol_map = {
     '6255.T': 'NPC',
     '464A.T': 'QPS',
-    '3778.T': 'SSKURA INTERNET'
+    '3778.T': 'SAKURA INTERNET'
 }
 symbols = list(symbol_map.keys())
 
