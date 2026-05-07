@@ -98,10 +98,36 @@ elif page_mode == "2. Inertia Grid (Price)":
 
 # --- モード3：News (画像3の外部要因監視) ---
 elif page_mode == "3. News":
-    st.title("Geopolitical & Economic News Monitor")
-    st.write("--- JP.REUTERS.COM ---")
-    st.markdown("- **[Fact/Flash] Israel attacked Beirut** (First since ceasefire agreement)")
-    st.markdown("- **[Fact/Flash] US-Iran talks 'very good'** Trump suggests possibility of agreement")
-    st.markdown("- **Nikkei 225 projected +2,000pt surge**")
-    st.caption("Last Update: 2026/05/06 21:44")
-    st.button("Fetch Latest News")
+    st.title("Target Symbol News (JP)")
+    
+    # 検索精度を上げるためのキーワード設定
+    jp_names = {
+        '6255.T': 'NPC 太陽電池',
+        '464A.T': 'QPS研究所 宇宙',
+        '3778.T': 'さくらインターネット AI'
+    }
+
+    if st.button("Fetch Latest 10 News"):
+        with st.spinner("国内の最新材料をスキャン中..."):
+            import urllib.parse
+            for ticker, query in jp_names.items():
+                st.subheader(f"Latest Trends: {query}")
+                
+                # GoogleニュースRSS（日本語・日本地域設定）
+                encoded_query = urllib.parse.quote(query)
+                rss_url = f"https://news.google.com/rss/search?q={encoded_query}&hl=ja&gl=JP&ceid=JP:ja"
+                
+                try:
+                    # pd.read_xmlでRSSをパースし、最新10件を取得
+                    df_news = pd.read_xml(rss_url, xpath=".//item")
+                    # head(10)で最新10件に固定
+                    for _, item in df_news.head(10).iterrows():
+                        # タイトルとソース、日付をコンパクトに表示
+                        st.markdown(f"**{item['title']}**")
+                        st.caption(f"{item['source']} | {item['pubDate']}")
+                except Exception:
+                    st.write("現在、この銘柄に関する直近のニュースは見つかりませんでした。")
+                
+                st.write("---") # 銘柄ごとの仕切り
+    else:
+        st.info("ボタンを押すと、各銘柄の最新ニュース10件を時系列で取得します。")
