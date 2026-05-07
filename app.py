@@ -102,9 +102,9 @@ elif page_mode == "3. News":
     
     # 検索精度を上げるためのキーワード設定
     jp_names = {
-        '6255.T': 'NPC 太陽電池',
-        '464A.T': 'QPS研究所 宇宙',
-        '3778.T': 'さくらインターネット AI'
+        '6255.T': 'NPC',
+        '464A.T': 'QPS研究所',
+        '3778.T': 'さくらインターネット'
     }
 
     if st.button("Fetch Latest 10 News"):
