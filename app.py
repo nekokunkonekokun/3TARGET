@@ -65,18 +65,21 @@ if page == "1. Analysis Grid":
         st.markdown(f":orange[**T40 (Warning): {p40:,.1f}**] / :red[**T35 (Trap): {p35:,.1f}**]")
         st.write("---")
 
-# --- 2. ニュースパネル（理由の裏取り） ---
+# --- 2. ニュースパネル（Yahoo!ファイナンスへのダイレクトリンク） ---
 elif page == "2. News Panel":
-    st.title("Market News Feed")
+    st.title("External Links")
+    st.info("銘柄の詳細情報・ニュースは、Yahoo!ファイナンスで確認してください。")
+    
     for ticker in symbols:
-        st.subheader(f"{symbol_map[ticker]} ({ticker})")
-        t_obj = yf.Ticker(ticker)
-        news_list = t_obj.news[:3]
-        if news_list:
-            for n in news_list:
-                st.write(f"**{n['title']}**")
-                st.caption(f"Source: {n['publisher']} | [Link]({n['link']})")
-        else:
-            st.write("No recent news found.")
+        # ティッカー（例: 6255.T）から数字部分のみを抽出
+        code = ticker.split('.')[0]
+        name = symbol_map[ticker]
+        
+        st.subheader(f"{name} ({ticker})")
+        
+        # Yahoo!ファイナンス 日本版の銘柄詳細URL
+        yahoo_url = f"https://finance.yahoo.co.jp/quote/{code}.T"
+        
+        # シンプルにリンクボタンのみ配置
+        st.link_button(f"Yahoo!ファイナンスで {name} を開く", yahoo_url, use_container_width=True)
         st.write("---")
-
